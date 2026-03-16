@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill's Leeds Restaurant - Contemporary British Dining</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset & Global Styles */
+        :root {
+            --primary-color: #1a0a00; /* Very Dark Brown (almost black) */
+            --accent-color: #c8722a; /* Burnt Orange/Terracotta */
+            --background-color: #f5f0e8; /* Soft Off-White/Cream */
+            --text-light: #f5f0e8;
+            --text-dark: #1a0a00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-color);
+            overflow-x: hidden; /* Prevent horizontal scroll from fixed elements */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 0.5em;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--primary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: var(--text-light);
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5em;
+        }
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem; /* Adjusted for smaller screens */
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            font-weight: bold;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none; /* Hidden by default for larger screens */
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none; /* Hide menu by default */
+                flex-direction: column;
+                background-color: var(--primary-color);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .nav-menu.active {
+                display: flex; /* Show menu when active */
+            }
+
+            .nav-menu li {
+                text-align: center;
+                margin: 0.5rem 0;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .hamburger {
+                display: block; /* Show hamburger icon */
+            }
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            background-size: cover;
+            background-position: center;
+            background-image: url('https://source.unsplash.com/featured/1600x900/?restaurant,food,plating');
+            /* Fallback background if image fails */
+            background-color: #333;
+        }
+
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+        }
+
+        #hero .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 1.5rem;
+            max-width: 800px;
+        }
+
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        #hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            #hero p {
+                font-size: 1.1rem;
+            }
+        }
+
+
+        /* Menu Highlights */
+        #menu-highlights {
+            padding: 4rem 0;
+            background-color: var(--background-color);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .menu-item p {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Chef Story */
+        #chef-story {
+            padding: 4rem 0;
+            background-color: #fff;
+        }
+
+        .chef-content {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            align-items: center;
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .chef-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chef-text {
+            max-width: 600px;
+        }
+
+        .chef-text h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .chef-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .chef-content {
+                flex-direction: row; /* Row on larger screens */
+                text-align: left;
+                justify-content: center;
+            }
+            .chef-content img {
+                max-width: 40%;
+            }
+            .chef-text {
+                max-width: 50%;
+            }
+        }
+
+
+        /* Ambience Gallery */
+        #ambience-gallery {
+            padding: 4rem 0;
+            background-color: var(--background-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px; /* Fixed height for consistency */
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay h4 {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            text-align: center;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Reservations & Delivery */
+        #reservations {
+            padding: 4rem 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        #reservations .container > p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reservation-cta-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reservation-cta-group > div {
+            flex: 1;
+            max-width: 450px;
+            padding: 1.5rem;
+            background-color: var(--background-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+        .reservation-cta-group > div h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+        .reservation-cta-group > div p {
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+
+        @media (min-width: 600px) {
+            .reservation-cta-group {
+                flex-direction: row;
+            }
+        }
+
+        /* Reviews Section */
+        #reviews {
+            padding: 4rem 0;
+            background-color: var(--background-color);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .review-card .stars {
+            color: #FFD700; /* Gold color for stars */
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .review-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .review-card .reviewer-name {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* New Features Section */
+        #features {
+            padding: 4rem 0;
+            background-color: #fff;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            background-color: var(--background-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to the top */
+        }
+
+        .feature-item i {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .feature-item p {
+            font-size: 1rem;
+            color: #555;
+            flex-grow: 1; /* Allow description to grow and push icon/heading up */
+        }
+
+        /* Contact Section */
+        #contact {
+            padding: 4rem 0;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+        }
+
+        #contact .section-heading {
+            color: var(--text-light);
+        }
+        #contact .section-heading::after {
+            background-color: var(--accent-color);
+        }
+
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+
+        .contact-info p i {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            width: 25px; /* Fixed width for icon alignment */
+            text-align: center;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background-color: #333;
+            color: var(--text-light);
+            font-family: 'Lato', sans-serif;
+            font-size: 1rem;
+        }
+
+        .contact-form input[type="text"]::placeholder,
+        .contact-form input[type="email"]::placeholder,
+        .contact-form textarea::placeholder {
+            color: #bbb;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .contact-form .btn {
+            align-self: flex-start;
+        }
+
+        @media (min-width: 768px) {
+            .contact-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+
+        /* Footer */
+        .footer {
+            background-color: #0c0500; /* Slightly darker than primary */
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-nav a {
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.5rem 1rem;
+        }
+
+        .footer-nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-contact p {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact a {
+             color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-contact a:hover {
+             color: var(--accent-color);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer .container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            .footer-nav, .footer-contact {
+                text-align: left;
+                flex: 1;
+            }
+            .footer-nav ul {
+                justify-content: flex-start;
+            }
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: translateY(-5px);
+            background-color: #1DA851;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-brand">Bill's Leeds</a>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#menu-highlights">Menu</a></li>
+                    <li><a href="#ambience-gallery">Ambience</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="hero-content">
+                <h1>Experience Contemporary British Flavours at Bill's Leeds</h1>
+                <p>Savour delectable dishes crafted with passion, from hearty breakfast to exquisite dinner. Your culinary journey begins here.</p>
+                <a href="#reservations" class="btn">Make a Reservation</a>
+            </div>
+        </section>
+
+        <!-- Menu Highlights Section -->
+        <section id="menu-highlights" class="container">
+            <h2 class="section-heading">Our Signature Flavours</h2>
+            <p class="text-center">Indulge in a taste of modern British cuisine, lovingly prepared with the finest seasonal ingredients. Each dish is a celebration of flavour.</p>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <h3>The Classic Full English</h3>
+                    <p>A hearty start to your day featuring Cumberland sausage, streaky bacon, eggs any style, roasted tomatoes, field mushrooms, and sourdough toast.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Pan-Seared Sea Bass</h3>
+                    <p>Flaky sea bass, perfectly seared with crisp skin, served atop a vibrant pea and broad bean risotto, finished with a lemon butter sauce.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Sticky Toffee Pudding</h3>
+                    <p>Our warm, intensely rich sticky toffee pudding, drenched in a buttery caramel sauce and served with a dollop of vanilla bean ice cream.</p>
+                </div>
+                <div class="menu-item">
+                    <h3>Wild Mushroom Risotto</h3>
+                    <p>Creamy Arborio rice folded with an earthy mix of wild mushrooms, Parmesan, and a hint of truffle oil, garnished with fresh parsley.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chef Story Section (using the "About" image) -->
+        <section id="chef-story" class="container">
+            <h2 class="section-heading">The Art Behind Our Plates</h2>
+            <div class="chef-content">
+                <img src="https://source.unsplash.com/featured/900x600/?fine,dining,interior" alt="Fine Dining Interior at Bill's Leeds">
+                <div class="chef-text">
+                    <h3>Crafted with Passion, Served with Pride</h3>
+                    <p>At Bill's Leeds, our kitchen is a hub of creativity and culinary excellence. Our chefs, inspired by the rich traditions of British and European fare, meticulously select fresh, local ingredients to bring you dishes that delight the senses.</p>
+                    <p>We believe that dining is an experience to be savoured, and every plate tells a story of dedication, flavour, and a love for good food. Join us and taste the passion.</p>
+                    <a href="#menu-highlights" class="btn">View Our Menus</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ambience Gallery Section -->
+        <section id="ambience-gallery" class="container">
+            <h2 class="section-heading">Our Inviting Atmosphere</h2>
+            <p class="text-center">Step into a space designed for comfort and conversation. From intimate corners to vibrant dining areas, Bill's Leeds offers the perfect setting for any occasion.</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/featured/600x400/?restaurant,ambience" alt="Restaurant Ambience at Bill's Leeds">
+                    <div class="gallery-item-overlay">
+                        <h4>Warm & Welcoming</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/featured/600x400/?chef,cooking" alt="Chef preparing food in the kitchen">
+                    <div class="gallery-item-overlay">
+                        <h4>Culinary Craft</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/featured/600x400/?restaurant,interior,lighting" alt="Restaurant interior with warm lighting">
+                    <div class="gallery-item-overlay">
+                        <h4>Elegant Dining</h4>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://source.unsplash.com/featured/600x400/?cocktails,bar,drinks" alt="Bar area with cocktails">
+                    <div class="gallery-item-overlay">
+                        <h4>Perfect Pairings</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reservations & Delivery Section -->
+        <section id="reservations" class="container">
+            <h2 class="section-heading">Plan Your Visit</h2>
+            <p>Whether you're celebrating a special occasion or simply craving a delicious meal, we invite you to experience Bill's Leeds. Booking ahead ensures the best experience.</p>
+            <div class="reservation-cta-group">
+                <div>
+                    <h3>Reservations</h3>
+                    <p>Secure your table for breakfast, lunch, afternoon tea, or dinner. We look forward to welcoming you.</p>
+                    <a href="tel:+442080545400" class="btn">Book a Table Now</a>
+                </div>
+                <div>
+                    <h3>Delivery & Takeaway</h3>
+                    <p>Enjoy Bill's Leeds from the comfort of your home. Delicious dishes, conveniently delivered or ready for collection.</p>
+                    <a href="#" class="btn">Order Online</a> <!-- Placeholder for delivery link -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews Section -->
+        <section id="reviews" class="container">
+            <h2 class="section-heading">What Our Guests Say</h2>
+            <p class="text-center">Hear from those who have savoured the Bill's Leeds experience. We're proud to be a local favourite.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"Absolutely delightful! The Full English was superb, and the atmosphere was so warm and inviting. A true gem in Leeds for a perfect start to the day."</p>
+                    <p class="reviewer-name">- Eleanor R., Leeds</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Had a fantastic dinner here last night. The sea bass was cooked to perfection, and the staff were incredibly attentive. Highly recommend for a relaxed yet upscale meal."</p>
+                    <p class="reviewer-name">- Marcus P., Chapel Allerton</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p>"The sticky toffee pudding is to die for! Every visit is a treat. It's quickly become our go-to spot for afternoon tea and dinner. Consistently excellent food and service."</p>
+                    <p class="reviewer-name">- Chloe S., Roundhay</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Features Section -->
+        <section id="features" class="container">
+            <h2 class="section-heading">Now Available: Enhanced Dining Experience</h2>
+            <p class="text-center">We're constantly working to make your experience at Bill's Leeds even more seamless and enjoyable.</p>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Online Booking</h3>
+                    <p>Book your table directly through our website, anytime, anywhere. No need to call, just a few clicks to secure your spot.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI Assistant</h3>
+                    <p>Get instant answers to common questions about our menu, hours, or special requests directly on our site. Your queries, answered efficiently.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>AI Voice Agent</h3>
+                    <p>Every call is answered promptly, ensuring you're never left waiting. Our AI voice agent can help with bookings and general enquiries, day or night.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fab fa-whatsapp"></i>
+                    <h3>WhatsApp Integration</h3>
+                    <p>Connect with us instantly on WhatsApp for quick questions, special requests, or even to adjust your booking. Instant replies, simplified communication.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fab fa-google"></i>
+                    <h3>Live Google Reviews</h3>
+                    <p>See the very latest feedback from our valued guests, updated automatically on our site. Transparency and trust, always.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-heading">Get In Touch</h2>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h3>Visit Us or Reach Out</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> 1 Albion Pl, Leeds LS1 6JL, United Kingdom</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+442080545400">+44 20 8054 5400</a></p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:marketing@bills-email.co.uk">marketing@bills-email.co.uk</a></p>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Send Us an Enquiry</h3>
+                        <form action="#" method="POST">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                            <input type="text" name="phone" placeholder="Your Phone Number (Optional)">
+                            <textarea name="message" placeholder="Your Message" required></textarea>
+                            <button type="submit" class="btn">Send Enquiry</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-section">
+                <h4 class="footer-brand">Bill's Leeds</h4>
+                <p>Contemporary British Dining in the heart of Leeds.</p>
+            </div>
+            <div class="footer-section footer-nav">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#menu-highlights">Menu</a></li>
+                    <li><a href="#ambience-gallery">Ambience</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section footer-contact">
+                <h4>Find Us</h4>
+                <p>1 Albion Pl, Leeds LS1 6JL</p>
+                <p>United Kingdom</p>
+                <p><a href="tel:+442080545400">+44 20 8054 5400</a></p>
+                <p><a href="mailto:marketing@bills-email.co.uk">marketing@bills-email.co.uk</a></p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Bill's Leeds Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/442080545400" target="_blank" class="whatsapp-float" aria-label="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript for smooth scrolling and mobile menu toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('navMenu');
+            const navLinks = document.querySelectorAll('#navMenu a');
+
+            // Toggle mobile menu
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                // Toggle between 'bars' and 'times' icon
+                if (navMenu.classList.contains('active')) {
+                    hamburger.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        hamburger.innerHTML = '<i class="fas fa-bars"></i>'; // Reset icon to bars
+                    }
+                });
+            });
+
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
